@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Manage orders</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <table>
+    <tr>
+      <td>Address</td>
+      <td>Shipping date</td>
+      <td>Paid</td>
+      <td>Courier</td>
+    </tr>
+
+    <tr *ngFor="let order of orders">
+      <td>
+        <ul>
+          <li>{{order.address.city}}</li>
+          <li>{{order.address.street}}</li>
+        </ul>
+      </td>
+      <td>{{order.shippingDate.getTime() | date}}</td>
+      <td>{{order.paid}}</td>
+      <td>
+        <ion-select [selectedText]="getCourier(order)" (ionChange)="onChooseCourier($event, order)">
+        <ion-select-option *ngFor="let courier of couriers" [value]="courier.email">{{courier.name  }}</ion-select-option>
+          <ion-select-option value="''">Delete</ion-select-option>
+      </ion-select></td>
+    </tr>
+  </table>
+</ion-content>

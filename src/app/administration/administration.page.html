@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Send order</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/set-orders">Manage orders</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header>
+    <h1>Fill the form</h1>
+  </ion-header>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" offset="1">
+          <ion-label><h1>Personal informations</h1></ion-label>
+          <ion-item>
+            <ion-label position="floating">Full name</ion-label>
+            <ion-input formControlName="customer" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Price</ion-label>
+            <ion-input type="number" formControlName="price"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Pick up Date</ion-label>
+            <ion-datetime formControlName="orderDate"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Note</ion-label>
+            <ion-textarea formControlName="note" type="textarea"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Phone</ion-label>
+            <ion-input formControlName="phone" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col id="address" size="4" offset="1">
+          <ion-label><h1>Address</h1></ion-label>
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">City</ion-label>
+              <ion-input type="text" formControlName="city"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Zip</ion-label>
+              <ion-input type="text" formControlName="zip"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Street</ion-label>
+              <ion-input type="text" formControlName="street"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Floor</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Door</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" offset="1">
+          <ion-label><h1>Package type</h1></ion-label>
+          <ion-list>
+            <ion-radio-group formControlName="type">
+              <ion-list-header>
+                <ion-label class="radio-label">Choose type</ion-label>
+              </ion-list-header>
+              <ion-item lines="none">
+                <ion-label>Mail</ion-label>
+                <ion-radio value="mail"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Box</ion-label>
+                <ion-radio value="box"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-col>
+        <ion-col size="4" offset="1">
+          <ion-label><h1>Payment</h1></ion-label>
+          <ion-list>
+            <ion-radio-group formControlName="payment">
+              <ion-list-header>
+                <ion-label class="radio-label">Choose</ion-label>
+              </ion-list-header>
+              <ion-item lines="none">
+                <ion-label>Transfer</ion-label>
+                <ion-radio value="transfer"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Cash on delivery</ion-label>
+                <ion-radio value="cash"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="form.value.type === 'box'">
+        <ion-col size="3" offset="4">
+          <ion-label><h1>Size of your package</h1></ion-label>
+          <ion-label>(cm and kg)</ion-label>
+          <ion-list>
+
+            <ion-item>
+              <ion-label position="floating">Height</ion-label>
+              <ion-input type="number" formControlName="height"></ion-input>
+            </ion-item>
+            <ion-item>
+
+              <ion-label position="floating">Width</ion-label>
+              <ion-input type="number" formControlName="width"></ion-input>
+            </ion-item>
+            <ion-item>
+
+              <ion-label position="floating">Long</ion-label>
+              <ion-input type="number" formControlName="long"></ion-input>
+            </ion-item>
+
+            <ion-item>
+
+              <ion-label position="floating">Weight</ion-label>
+              <ion-input type="number" formControlName="weight"></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row id="button-row">
+        <ion-col id="button-col" size="2" offset="4">
+          <ion-button (click)="uploadOrder()">Order</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <div *ngIf="isAuthenticated()">
+    <ion-label>Upload CSV file:</ion-label>
+    <ion-input type="file" (change)="uploadCSV($event)"></ion-input>
+
+    <ion-progress-bar color="primary" [value]="percentage"></ion-progress-bar>
+  </div>
+</ion-content>

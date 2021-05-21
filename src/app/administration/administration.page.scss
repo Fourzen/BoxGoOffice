@@ -1,0 +1,30 @@
+
+h1 {
+  margin-left: 2vh;
+}
+
+ion-col {
+  padding: 20px;
+  margin: 1rem;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+  border-radius: 20px;
+}
+
+#button-row {
+
+  #button-col {
+    border: none;
+    padding: 0;
+    text-align: center;
+    ion-button{
+      height: 120%;
+      width: 140%;
+      border: none;
+      --border-radius: 20px;
+    }
+  }
+}
+
+
+
